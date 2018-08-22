@@ -8,12 +8,32 @@ $(document).ready(function(){
     //initialisationArray();
     addImages();
     console.log(fichiers);
+    afficheLast();
 });
 
 //recuperation du jeu lancé
 function getJeu() {
   jeu = getCookie("jeu");
 }
+
+function afficheLast(){
+  var str1 = '../sources/'
+  var str3 = '.jpg'
+  var row = fichiers[fichiers.length - 1];
+  var strf = str1.concat(row[0],str3);
+  $("#i1").attr("src",strf);
+  strf = str1.concat(row[1],str3);
+  $("#i2").attr("src",strf);
+  strf = str1.concat(row[2],str3);
+  $("#i3").attr("src",strf);
+}
+
+document.addEventListener("keydown", function keyDown() {
+  addImages();
+  console.log(fichiers);
+  afficheLast();
+});
+
 
 function addImages(){
   var row = [];

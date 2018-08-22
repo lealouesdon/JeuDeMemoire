@@ -1,0 +1,21 @@
+html{
+  text-align:center;
+}
+body{
+  width: 100%;
+  text-align:center;
+}
+.main{
+  width: 100%;
+  display: grid;
+}
+
+.elem{
+display: inline;
+  height: 100%;
+}
+img{
+  height: 50px;
+  width: 50px;
+  display: inline;
+}
