@@ -1,0 +1,45 @@
+html{
+  background-color: #AFEEEE;
+}
+input{
+  border-radius: 10%;
+  background-color: #eeeeaf;
+  margin-top: 10vh;
+  color: black;
+  font-size: 10vh;
+  height: 20vh;
+  width: 100%;
+  border: 0.5vw solid black;
+   border-radius:10%;
+   box-shadow: 5px 10px;
+}
+
+body{
+  height: 100vh;
+  margin: auto;
+  max-width: 800px;
+}
+
+.main{
+  height: 100%;
+  /*position: absolute;*/
+  width: 100%;
+  /*top : 40vh;*/
+  display: grid;
+grid-template-columns: auto;
+padding: 10px;
+text-align: center;
+}
+
+#logo{
+  position: fixed;
+    top: 0;
+    left: 0;
+    height: 10vh;
+    width: 10vh;
+}
+
+p{
+  font-size: 3vh;
+  height: 20%
+}
