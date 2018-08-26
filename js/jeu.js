@@ -2,44 +2,49 @@ var jeu;
 var fichiers = [];
 //copie pour l'utilisateur
 var fichiers2 = [];
-var rowTemp = [];
 //pour qu'il n'y est pas d'image identique
 var done = [];
 var clock;
 var etape;  //1 = 10 sec debut; 2 = 1min de memo; 3 = 10 sec ; 4 = 3min jeu
-var index = 0; //tete de lecture
+var index; //tete de lecture
 //fonction de départ
 $(document).ready(function(){
     getJeu();
-    $('.overlay').hide();
-    $("#text").text(jeu);
-    $('#sortable').hide();
-    $('#corr').hide();
-    //initialisationArray();
-    //addImages();
-    console.log(fichiers);
-    //afficheLast();
-    etape = 1;
-    // Instantiate a counter
-				clock = new FlipClock($('.clock'), 10, {
-					clockFace: 'MinuteCounter',
-					autoStart: true,
-					countdown: true,
-          callbacks:{
-                stop: function() {stop();}
-            }
-				});
-
-
-
+    start();
 });
+
+//start
+function start() {
+  $('.overlay').hide();
+  $("#text").text(jeu);
+  $('#sortable').hide();
+  $('#corr').hide();
+  etape = 1;
+  index = 0;
+  // Instantiate a counter
+      clock = new FlipClock($('.clock'), 10, {
+        clockFace: 'MinuteCounter',
+        autoStart: true,
+        countdown: true,
+        callbacks:{
+              stop: function() {stop();}
+          }
+      });
+}
+
+//replay
+function replay() {
+  fichiers=[];
+  fichiers2=[];
+  done=[];
+  points = 0;
+  start();
+}
 
 //recuperation du jeu lancé
 function getJeu() {
   jeu = getCookie("jeu");
 }
-
-
 
 function afficheIndex(){
     var str1 = '../sources/'
@@ -53,8 +58,6 @@ function afficheIndex(){
       strf = str1.concat(row[2],str3);
       $("#i3").attr("src",strf);
     }
-
-
 }
 
 function afficheIndexMix(){
@@ -91,15 +94,14 @@ function sauvegarde() {
     i++;
   }
   fichiers2.push(row);
-
-
 }
+
 //skip button
 function corr() {
   clock.stop();
 }
-//click event
 
+//click event
 $('html').click(function(event){
    if(etape==2){
       addImages();
@@ -119,7 +121,9 @@ function addImages(){
   var n;
   var i = 0;
   var z = "0";
-  if(done.length<100){
+  if(done.length+3<100){
+    done = [];
+  }
   while (i<3) {
       n = Math.floor((Math.random() * 100));
       if(n<10){
@@ -134,8 +138,7 @@ function addImages(){
       }
     }
     fichiers.push(row);
-
-  }
+    console.log(fichiers.length);
 }
 
 //entre étape
@@ -186,12 +189,12 @@ function stop() {
     etape = 4;
   }else{
     $('#sortable').hide();
-    $('.overlay').show();
     verifier();
     var str1 = "Points :";
     var str2 = "/";
-    var str = str1.concat(points,str2,fichiers.length)
+    var str = str1.concat(points,str2,fichiers.length.toString());
     $("#text").text(str);
+    $('.overlay').show();
     etape=5;
   }
 }
