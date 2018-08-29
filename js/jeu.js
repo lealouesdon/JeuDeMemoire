@@ -138,7 +138,7 @@ function addImages(){
       }
     }
     fichiers.push(row);
-    console.log(fichiers.length);
+    //console.log(fichiers.length);
 }
 
 //entre étape
