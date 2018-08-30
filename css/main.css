@@ -17,6 +17,7 @@ input{
 body{
   height: 100vh;
   margin: auto;
+  width: 80vw;
   max-width: 800px;
 }
 

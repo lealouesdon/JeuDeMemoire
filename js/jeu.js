@@ -7,8 +7,14 @@ var done = [];
 var clock;
 var etape;  //1 = 10 sec debut; 2 = 1min de memo; 3 = 10 sec ; 4 = 3min jeu
 var index; //tete de lecture
+var sortable;
 //fonction de départ
 $(document).ready(function(){
+  var el = document.getElementById('sortable');
+  sortable = Sortable.create(el);
+  var state = sortable.option("disabled"); // get
+
+	sortable.option("disabled", true); // set
     getJeu();
     start();
 });
@@ -34,6 +40,9 @@ function start() {
 
 //replay
 function replay() {
+  var state = sortable.option("disabled"); // get
+
+	sortable.option("disabled", true); // set
   fichiers=[];
   fichiers2=[];
   done=[];
@@ -93,6 +102,7 @@ function sauvegarde() {
     row.push(res);
     i++;
   }
+  console.log(row);
   fichiers2.push(row);
 }
 
@@ -121,7 +131,8 @@ function addImages(){
   var n;
   var i = 0;
   var z = "0";
-  if(done.length+3<100){
+  if(done.length+3>100){
+    console.log("passe");
     done = [];
   }
   while (i<3) {
@@ -181,8 +192,8 @@ function stop() {
         }
     });
     //
-    var el = document.getElementById('sortable');
-    var sortable = Sortable.create(el);
+    var state = sortable.option("disabled"); // get
+  	sortable.option("disabled", false); // set
     //console.log(sortable.toArray());
     index = 0;
     afficheIndexMix();
@@ -205,7 +216,7 @@ function verifier() {
   var i = 0;
   var row1;
   var row2;
-  while(i<fichiers2.length){
+  while(i<fichiers2.length&&i<fichiers.length){
     row1 = fichiers[i];
     row2 = fichiers2[i];
     if(row1[0]==row2[0]&&row1[1]==row2[1]&&row1[2]==row2[2]){
@@ -213,6 +224,7 @@ function verifier() {
     }
     i++;
   }
+  console.log(points);
 }
 
 
