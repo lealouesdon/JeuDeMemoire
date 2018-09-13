@@ -1,6 +1,11 @@
 html{
   text-align:center;
-  font : normal 11px "Helvetica Neue", Helvetica, sans-serif;
+  font-family: mainFont;
+}
+
+@font-face {
+    font-family: mainFont;
+    src: url(../src/FredokaOne-Regular.ttf);
 }
 
 @media only screen and (max-width:800px) {
@@ -19,7 +24,18 @@ html{
 }
 .overlay{
     opacity:0.8;
-    background-color:#ccc;
+    background-color:#2D8D8E;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0px;
+    left:0px;
+    z-index:1000;
+}
+
+.overTime{
+    opacity:1;
+    background-color:#2D8D8E;
     position:fixed;
     width:100%;
     height:100%;
@@ -46,7 +62,7 @@ body{
   width: 100vw;
   text-align:center;
 
-  background-color: #AFEEEE;
+  background-color: #2D8D8E;
   max-width: 800px;
   margin: auto;
 }
@@ -74,17 +90,16 @@ body{
   width: 20%;*/
 
   text-align: center;
-  margin-left: 3vw;
+
   --aspect-ratio: 1/1;
 }
 
 .image{
 /*position: relative;*/
-  width: 100%;
-  height: 100%;
-  border: 0.5vw solid black;
+  width: 80%;
+  height: 90%;
    border-radius:10%;
-   box-shadow: 5px 10px;
+   box-shadow: 5px 10px 25px #4c4c4c;
   /*padding-top: 66.66%; /* 3:2 Aspect Ratio */
 
 }
@@ -103,16 +118,10 @@ zoom: 0.6;
 }
 
 input{
-  border-radius: 10%;
-  background-color: #eeeeaf;
   margin-top: 10vh;
-  color: black;
+  color: white;
   font-size: 10vh;
-  height: 20vh;
-  width: 100%;
-  border: 0.5vw solid black;
-   border-radius:10%;
-   box-shadow: 5px 10px;
+
 }
 
 #text{
@@ -129,14 +138,68 @@ input{
 }
 #corr{
   position: fixed;
-    bottom: 0;
-    right: 0;
-    height: 10vh;
-    width: 10vh;
-    background-color: #eeeeaf;
-    color: black;
-    font-size: 2vh;
-    border: 0.2vw solid black;
-     border-radius:10%;
-     box-shadow: 5px 10px;
+    bottom: 5vh;
+    right: 5vw;
+    background-color: #2D8D8E;
+    color: white;
+    font-size: 7vh;
+    font-family: mainFont;
+    font-weight: bold;
+
+
+}
+
+#sortable{
+  position: absolute;
+  height: 40vh;
+  width: 70vw;
+  border: 0.1vw solid black;
+  left: 12vw;
+  top: 35vh;
+  padding: 3vh;
+  border-color: white;
+  border-radius: 10px;
+}
+
+li{
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+/*clock*/
+
+#container {
+  width: 40vw;
+  height: 40vh;
+  left : 30vw;
+  top: 12vh;
+  position: absolute;
+}
+#clock {
+  width: 20vw;
+  height: 20vh;
+  left : 40vw;
+  top:3vh;
+  position: absolute;
+}
+
+#titre{
+  color: white;
+  top : 20vh;
+  left: 41vw;
+  font-size: 5vh;
+  position: absolute;
+}
+
+svg{
+  width: 100%;
+  height: 100%;
+}
+
+#desc{
+  position: absolute;
+  top : 60vh;
+  left: 40vw;
+  font-size: 7vh;
+  color: white;
 }

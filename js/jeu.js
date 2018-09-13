@@ -6,11 +6,24 @@ var fichiers2 = [];
 var done = [];
 var clock;
 var etape;  //1 = 10 sec debut; 2 = 1min de memo; 3 = 10 sec ; 4 = 3min jeu
+var etapeNextTime = 60;
 var index; //tete de lecture
 var sortable;
+
+//clock
+var countdownNumberEl;
+var countdownNumberMain;
+var countdown = 10;
+//countdownNumberEl.textContent = 10;
+var bar;
+
 //fonction de départ
 $(document).ready(function(){
   var el = document.getElementById('sortable');
+  //countdownNumberEl = document.getElementById('countdown-number');
+  //countdownNumberMain = document.getElementById('countdown-numberMain');
+  //countdownNumberEl.textContent = countdown;
+  //countdownNumberMain.textContent = countdown;
   sortable = Sortable.create(el);
   var state = sortable.option("disabled"); // get
 
@@ -22,20 +35,46 @@ $(document).ready(function(){
 //start
 function start() {
   $('.overlay').hide();
+  $('.overTime').show();
   $("#text").text(jeu);
   $('#sortable').hide();
   $('#corr').hide();
   etape = 1;
   index = 0;
-  // Instantiate a counter
-      clock = new FlipClock($('.clock'), 10, {
-        clockFace: 'MinuteCounter',
-        autoStart: true,
-        countdown: true,
-        callbacks:{
-              stop: function() {stop();}
+
+      bar = new ProgressBar.Circle(container, {
+        color: '#FFFFFF',
+        // This has to be the same size as the maximum width to
+        // prevent clipping
+        strokeWidth: 4,
+        trailWidth: 0,
+        duration: 10000,
+        text: {
+          autoStyleContainer: false
+        },
+        from: { color: '#247273', width: 8 },
+        to: { color: '#247273', width: 8 },
+        // Set default step function for all animate calls
+        step: function(state, circle) {
+          circle.path.setAttribute('stroke', state.color);
+          circle.path.setAttribute('stroke-width', state.width);
+
+          var value = Math.round(circle.value() * 10 % 100);
+          if (value === 10) {
+            etape1();
+          } else {
+            circle.setText(value);
           }
+
+        }
       });
+      bar.text.style.fontSize = '10vh';
+
+      bar.animate(1.0);  // Number from 0.0 to 1.0
+
+
+
+
 }
 
 //replay
@@ -108,7 +147,7 @@ function sauvegarde() {
 
 //skip button
 function corr() {
-  clock.stop();
+  etape4();
 }
 
 //click event
@@ -135,6 +174,7 @@ function addImages(){
     console.log("passe");
     done = [];
   }
+
   while (i<3) {
       n = Math.floor((Math.random() * 100));
       if(n<10){
@@ -153,20 +193,44 @@ function addImages(){
 }
 
 //entre étape
-function stop() {
+/*function stop() {
   if(etape==1){
     $('#sortable').show();
-    clock = new FlipClock($('.clock'), 60, {
-      clockFace: 'MinuteCounter',
-      autoStart: true,
-      countdown: true,
-      callbacks:{
-            stop: function() {stop();}
-        }
-    });
+
     etape = 2;
+    bar = new ProgressBar.Circle('#clock', {
+      color: '#aaa',
+      // This has to be the same size as the maximum width to
+      // prevent clipping
+      strokeWidth: 4,
+      trailWidth: 1,
+      duration: 10000,
+      text: {
+        autoStyleContainer: false
+      },
+      from: { color: '#aaa', width: 1 },
+      to: { color: '#333', width: 4 },
+      // Set default step function for all animate calls
+      step: function(state, circle) {
+        circle.path.setAttribute('stroke', state.color);
+        circle.path.setAttribute('stroke-width', state.width);
+
+        var value = Math.round(circle.value() * 60 % 100);
+        if (value === 60) {
+          stop();
+        } else {
+          circle.setText(value);
+        }
+
+      }
+    });
+    bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+    bar.text.style.fontSize = '2rem';
+
+    bar.animate(1.0);  // Number from 0.0 to 1.0
     addImages();
     afficheIndex();
+    $('.overTime').hide();
     //console.log(etape);
   }else if (etape==2) {
     $('#sortable').hide();
@@ -183,16 +247,16 @@ function stop() {
   }else if (etape == 3){
     $('#sortable').show();
     $('#corr').show();
-    clock = new FlipClock($('.clock'), 180, {
+    /*clock = new FlipClock($('.clock'), 180, {
       clockFace: 'MinuteCounter',
       autoStart: true,
       countdown: true,
       callbacks:{
             stop: function() {stop();}
         }
-    });
+    });*/
     //
-    var state = sortable.option("disabled"); // get
+    /*var state = sortable.option("disabled"); // get
   	sortable.option("disabled", false); // set
     //console.log(sortable.toArray());
     index = 0;
@@ -208,8 +272,137 @@ function stop() {
     $('.overlay').show();
     etape=5;
   }
+}*/
+
+function etape1() {
+  $('#sortable').show();
+  $('#container').html("");
+  etape = 2;
+  bar = new ProgressBar.Circle('#clock', {
+    color: '#FFFFFF',
+    // This has to be the same size as the maximum width to
+    // prevent clipping
+    strokeWidth: 4,
+    trailWidth: 0,
+    duration: 60000,
+    text: {
+      autoStyleContainer: false
+    },
+    from: { color: '#247273', width: 8 },
+    to: { color: '#247273', width: 8 },
+    // Set default step function for all animate calls
+    step: function(state, circle) {
+      circle.path.setAttribute('stroke', state.color);
+      circle.path.setAttribute('stroke-width', state.width);
+
+      var value = Math.round(circle.value() * 60 % 100);
+      if (value === 60) {
+        etape2();
+      } else {
+        circle.setText(value);
+      }
+
+    }
+  });
+  bar.text.style.fontSize = '2rem';
+
+  bar.animate(1.0);  // Number from 0.0 to 1.0
+  addImages();
+  afficheIndex();
+  $('.overTime').hide();
 }
 
+function etape2() {
+  $('#sortable').hide();
+  $('.overTime').show();
+  $('#clock').html("");
+  bar = new ProgressBar.Circle('#container', {
+    color: '#FFFFFF',
+    // This has to be the same size as the maximum width to
+    // prevent clipping
+    strokeWidth: 4,
+    trailWidth: 0,
+    duration: 10000,
+    text: {
+      autoStyleContainer: false
+    },
+    from: { color: '#247273', width: 8 },
+    to: { color: '#247273', width: 8 },
+    // Set default step function for all animate calls
+    step: function(state, circle) {
+      circle.path.setAttribute('stroke', state.color);
+      circle.path.setAttribute('stroke-width', state.width);
+
+      var value = Math.round(circle.value() * 10 % 100);
+      if (value === 10) {
+        etape3();
+      } else {
+        circle.setText(value);
+      }
+
+    }
+  });
+  bar.text.style.fontSize = '2rem';
+
+  bar.animate(1.0);  // Number from 0.0 to 1.0
+  etape = 3;
+}
+
+
+function etape3() {
+  $('#sortable').show();
+  $('#corr').show();
+  $('.overTime').hide();
+  $('#clock').html("");
+  var state = sortable.option("disabled"); // get
+  sortable.option("disabled", false); // set
+  //console.log(sortable.toArray());
+  bar = new ProgressBar.Circle('#clock', {
+    color: '#FFFFFF',
+    // This has to be the same size as the maximum width to
+    // prevent clipping
+    strokeWidth: 4,
+    trailWidth: 0,
+    duration: 180000,
+    text: {
+      autoStyleContainer: false
+    },
+    from: { color: '#247273', width: 8 },
+    to: { color: '#247273', width: 8 },
+    // Set default step function for all animate calls
+    step: function(state, circle) {
+      circle.path.setAttribute('stroke', state.color);
+      circle.path.setAttribute('stroke-width', state.width);
+
+      var value = Math.round(circle.value() * 180 % 100);
+      if (value === 180) {
+        etape4();
+      } else {
+        circle.setText(value);
+      }
+
+    }
+  });
+  bar.text.style.fontSize = '2rem';
+
+  bar.animate(1.0);  // Number from 0.0 to 1.0
+  index = 0;
+  afficheIndexMix();
+  etape = 4;
+}
+
+function etape4() {
+  $('#sortable').hide();
+  $('.overTime').hide();
+  $('#clock').html("");
+  verifier();
+  var str1 = "Points :";
+  var str2 = "/";
+  var str = str1.concat(points,str2,fichiers.length.toString());
+  $("#text").text(str);
+  $('.overlay').show();
+  etape=5;
+}
 //dernière étape
 var points = 0;
 function verifier() {

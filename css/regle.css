@@ -1,0 +1,103 @@
+@font-face {
+    font-family: mainFont;
+    src: url(../src/FredokaOne-Regular.ttf);
+}
+
+#logo{
+  position: fixed;
+    top: 0;
+    left: 0;
+    height: 10vh;
+    width: 10vh;
+}
+
+body{
+  height: 100vh;
+  margin: auto;
+  width: 80vw;
+  max-width: 800px;
+  font-family: mainFont;
+}
+
+
+
+.time{
+  font-size: 10vh;
+  border-style: solid;
+    border-width: 2vh;
+    border-radius: 50%;
+    /*padding-top:5.5vh;
+    padding-bottom:5.5vh;
+    padding-right: 4vw;
+    padding-left: 4vw;*/
+    margin: auto;
+    padding-top: 5vh;
+    width: 22vh;
+    height: 17vh;
+    padding: auto;
+    align : center;
+    color: white;
+    border-color: #247273;
+    font-weight: bold;
+
+}
+
+input{
+  border-radius: 10%;
+  background-color: white;
+  margin-top: 10vh;
+  color: #1D595A;
+  font-size: 7vh;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  border-radius: 20px;
+  font-weight: bold;
+  font-family: mainFont;
+
+}
+
+table{
+  padding-top: 20vh;
+  padding-bottom: 0vh;
+
+  width: 100%;
+}
+
+.divdesc{
+  text-align: left;
+  padding-top: 3vh;
+  margin-left: 3vw;
+  color: white;
+  font-weight: bold;
+}
+
+th{
+  width: 20%;
+}
+
+.desc{
+  display: inline-block;
+  width: 80%;
+  font-size: 4.1vh;
+  padding-right: 1vw;
+
+}
+.btn{
+  text-align: center;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 2vh solid transparent;
+  border-bottom: 2vh solid transparent;
+  border-left: 2vh solid white;
+  display: inline-block;
+}
+
+html{
+  background-color: #2D8D8E;
+
+}
