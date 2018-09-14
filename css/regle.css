@@ -13,7 +13,7 @@
 
 body{
   height: 100vh;
-  margin: auto;
+
   width: 80vw;
   max-width: 800px;
   font-family: mainFont;
@@ -43,6 +43,7 @@ body{
 }
 
 input{
+  position: absolute;
   border-radius: 10%;
   background-color: white;
   margin-top: 10vh;
@@ -54,6 +55,8 @@ input{
   padding-right: 5vw;
   border-radius: 20px;
   font-weight: bold;
+  top : 70vh;
+  left: 38vw;
   font-family: mainFont;
 
 }
@@ -62,7 +65,8 @@ table{
   padding-top: 20vh;
   padding-bottom: 0vh;
 
-  width: 100%;
+  width: 90vw;
+  margin-left: 5vw;
 }
 
 .divdesc{

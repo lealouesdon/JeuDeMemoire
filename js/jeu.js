@@ -9,6 +9,7 @@ var etape;  //1 = 10 sec debut; 2 = 1min de memo; 3 = 10 sec ; 4 = 3min jeu
 var etapeNextTime = 60;
 var index; //tete de lecture
 var sortable;
+screen.orientation.lock('landscape');
 
 //clock
 var countdownNumberEl;
@@ -46,7 +47,7 @@ function start() {
         color: '#FFFFFF',
         // This has to be the same size as the maximum width to
         // prevent clipping
-        strokeWidth: 4,
+        strokeWidth: 8,
         trailWidth: 0,
         duration: 10000,
         text: {
@@ -192,88 +193,6 @@ function addImages(){
     //console.log(fichiers.length);
 }
 
-//entre étape
-/*function stop() {
-  if(etape==1){
-    $('#sortable').show();
-
-    etape = 2;
-    bar = new ProgressBar.Circle('#clock', {
-      color: '#aaa',
-      // This has to be the same size as the maximum width to
-      // prevent clipping
-      strokeWidth: 4,
-      trailWidth: 1,
-      duration: 10000,
-      text: {
-        autoStyleContainer: false
-      },
-      from: { color: '#aaa', width: 1 },
-      to: { color: '#333', width: 4 },
-      // Set default step function for all animate calls
-      step: function(state, circle) {
-        circle.path.setAttribute('stroke', state.color);
-        circle.path.setAttribute('stroke-width', state.width);
-
-        var value = Math.round(circle.value() * 60 % 100);
-        if (value === 60) {
-          stop();
-        } else {
-          circle.setText(value);
-        }
-
-      }
-    });
-    bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
-    bar.text.style.fontSize = '2rem';
-
-    bar.animate(1.0);  // Number from 0.0 to 1.0
-    addImages();
-    afficheIndex();
-    $('.overTime').hide();
-    //console.log(etape);
-  }else if (etape==2) {
-    $('#sortable').hide();
-    clock = new FlipClock($('.clock'), 10, {
-      clockFace: 'MinuteCounter',
-      autoStart: true,
-      countdown: true,
-      callbacks:{
-            stop: function() {stop();}
-        }
-    });
-    etape = 3;
-    //console.log(etape);
-  }else if (etape == 3){
-    $('#sortable').show();
-    $('#corr').show();
-    /*clock = new FlipClock($('.clock'), 180, {
-      clockFace: 'MinuteCounter',
-      autoStart: true,
-      countdown: true,
-      callbacks:{
-            stop: function() {stop();}
-        }
-    });*/
-    //
-    /*var state = sortable.option("disabled"); // get
-  	sortable.option("disabled", false); // set
-    //console.log(sortable.toArray());
-    index = 0;
-    afficheIndexMix();
-    etape = 4;
-  }else{
-    $('#sortable').hide();
-    verifier();
-    var str1 = "Points :";
-    var str2 = "/";
-    var str = str1.concat(points,str2,fichiers.length.toString());
-    $("#text").text(str);
-    $('.overlay').show();
-    etape=5;
-  }
-}*/
-
 function etape1() {
   $('#sortable').show();
   $('#container').html("");
@@ -282,9 +201,9 @@ function etape1() {
     color: '#FFFFFF',
     // This has to be the same size as the maximum width to
     // prevent clipping
-    strokeWidth: 4,
+    strokeWidth: 8,
     trailWidth: 0,
-    duration: 60000,
+    duration: 600,
     text: {
       autoStyleContainer: false
     },
@@ -320,9 +239,9 @@ function etape2() {
     color: '#FFFFFF',
     // This has to be the same size as the maximum width to
     // prevent clipping
-    strokeWidth: 4,
+    strokeWidth: 8,
     trailWidth: 0,
-    duration: 10000,
+    duration: 100,
     text: {
       autoStyleContainer: false
     },
@@ -354,6 +273,8 @@ function etape3() {
   $('#corr').show();
   $('.overTime').hide();
   $('#clock').html("");
+  $('#titre').html("Restitution");
+  $('#titre').css('padding-left', '2vw');
   var state = sortable.option("disabled"); // get
   sortable.option("disabled", false); // set
   //console.log(sortable.toArray());
@@ -361,7 +282,7 @@ function etape3() {
     color: '#FFFFFF',
     // This has to be the same size as the maximum width to
     // prevent clipping
-    strokeWidth: 4,
+    strokeWidth: 8,
     trailWidth: 0,
     duration: 180000,
     text: {
@@ -395,6 +316,7 @@ function etape4() {
   $('#sortable').hide();
   $('.overTime').hide();
   $('#clock').html("");
+  $('#container').html("");
   verifier();
   var str1 = "Points :";
   var str2 = "/";

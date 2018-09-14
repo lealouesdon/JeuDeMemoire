@@ -6,3 +6,4 @@ function jouer(nb) {
     var res = str1.concat(nb, str3);
   document.cookie = res;
 }
+screen.orientation.lock('landscape');
