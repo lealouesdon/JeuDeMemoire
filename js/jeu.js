@@ -101,7 +101,7 @@ function afficheIndex(){
 }
 var passe = false;
 function afficheIndexMix(){
-  if(!passe){
+
     var str1 = '../sources/'
     var str3 = '.jpg'
     if (index<fichiers.length){
@@ -119,8 +119,7 @@ function afficheIndexMix(){
           parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
       }
     }
-    passe=true;
-  }
+
 
 }
 
@@ -146,6 +145,8 @@ function corr() {
 
 //click event
 $('html').click(function(event){
+  console.log("passe");
+  console.log(etape);
    if(etape==2){
       addImages();
       index +=1;
@@ -260,7 +261,7 @@ function etape2() {
 
 function etape3() {
   $('#sortable').show();
-  $('#corr').show();
+  $('.divCorr').show();
   $('.overTime').hide();
   $('#clock').html("");
   $('#titre').html("Restitution");
@@ -297,7 +298,11 @@ function etape3() {
 
   bar.animate(1.0);  // Number from 0.0 to 1.0
   index = 0;
-  afficheIndexMix();
+  if(!passe){
+    afficheIndexMix();
+    passe=true;
+  }
+
   etape = 4;
 }
 
