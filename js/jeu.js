@@ -4,27 +4,18 @@ var fichiers = [];
 var fichiers2 = [];
 //pour qu'il n'y est pas d'image identique
 var done = [];
-var clock;
 var etape;  //1 = 10 sec debut; 2 = 1min de memo; 3 = 10 sec ; 4 = 3min jeu
-var etapeNextTime = 60;
 var index; //tete de lecture
 var sortable;
 screen.orientation.lock('landscape');
 
 //clock
-var countdownNumberEl;
-var countdownNumberMain;
-var countdown = 10;
-//countdownNumberEl.textContent = 10;
 var bar;
 
 //fonction de départ
 $(document).ready(function(){
   var el = document.getElementById('sortable');
-  //countdownNumberEl = document.getElementById('countdown-number');
-  //countdownNumberMain = document.getElementById('countdown-numberMain');
-  //countdownNumberEl.textContent = countdown;
-  //countdownNumberMain.textContent = countdown;
+
   sortable = Sortable.create(el);
   var state = sortable.option("disabled"); // get
 
@@ -39,7 +30,7 @@ function start() {
   $('.overTime').show();
   $("#text").text(jeu);
   $('#sortable').hide();
-  $('#corr').hide();
+  $('.divCorr').hide();
   etape = 1;
   index = 0;
 
@@ -108,25 +99,29 @@ function afficheIndex(){
       $("#i3").attr("src",strf);
     }
 }
-
+var passe = false;
 function afficheIndexMix(){
-  var str1 = '../sources/'
-  var str3 = '.jpg'
-  if (index<fichiers.length){
-    var row = fichiers[index];
-    var strf = str1.concat(row[0],str3);
-    $("#i1").attr("src",strf);
-    strf = str1.concat(row[1],str3);
-    $("#i2").attr("src",strf);
-    strf = str1.concat(row[2],str3);
-    $("#i3").attr("src",strf);
+  if(!passe){
+    var str1 = '../sources/'
+    var str3 = '.jpg'
+    if (index<fichiers.length){
+      var row = fichiers[index];
+      var strf = str1.concat(row[0],str3);
+      $("#i1").attr("src",strf);
+      strf = str1.concat(row[1],str3);
+      $("#i2").attr("src",strf);
+      strf = str1.concat(row[2],str3);
+      $("#i3").attr("src",strf);
 
-    var parent = $("#sortable");
-    var divs = parent.children();
-    while (divs.length) {
-        parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+      var parent = $("#sortable");
+      var divs = parent.children();
+      while (divs.length) {
+          parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+      }
     }
+    passe=true;
   }
+
 }
 
 //sauvegarde
@@ -138,11 +133,9 @@ function sauvegarde() {
   while (i<imgs.length) {
     var str = imgs[i].getElementsByTagName("img")[0].getAttribute("src");
     var res = str.substring(11, 13);
-    //console.log(res);
     row.push(res);
     i++;
   }
-  console.log(row);
   fichiers2.push(row);
 }
 
@@ -162,7 +155,6 @@ $('html').click(function(event){
      sauvegarde();
      index +=1;
      afficheIndexMix();
-     //console.log(fichiers2);
    }
 });
 
@@ -172,7 +164,6 @@ function addImages(){
   var i = 0;
   var z = "0";
   if(done.length+3>100){
-    console.log("passe");
     done = [];
   }
 
@@ -190,7 +181,6 @@ function addImages(){
       }
     }
     fichiers.push(row);
-    //console.log(fichiers.length);
 }
 
 function etape1() {
@@ -203,7 +193,7 @@ function etape1() {
     // prevent clipping
     strokeWidth: 8,
     trailWidth: 0,
-    duration: 600,
+    duration: 60000,
     text: {
       autoStyleContainer: false
     },
@@ -241,7 +231,7 @@ function etape2() {
     // prevent clipping
     strokeWidth: 8,
     trailWidth: 0,
-    duration: 100,
+    duration: 10000,
     text: {
       autoStyleContainer: false
     },
@@ -277,7 +267,6 @@ function etape3() {
   $('#titre').css('padding-left', '2vw');
   var state = sortable.option("disabled"); // get
   sortable.option("disabled", false); // set
-  //console.log(sortable.toArray());
   bar = new ProgressBar.Circle('#clock', {
     color: '#FFFFFF',
     // This has to be the same size as the maximum width to
@@ -317,8 +306,9 @@ function etape4() {
   $('.overTime').hide();
   $('#clock').html("");
   $('#container').html("");
+  passe = false;
   verifier();
-  var str1 = "Points :";
+  var str1 = "Points : ";
   var str2 = "/";
   var str = str1.concat(points,str2,fichiers.length.toString());
   $("#text").text(str);
@@ -339,7 +329,6 @@ function verifier() {
     }
     i++;
   }
-  console.log(points);
 }
 
 
