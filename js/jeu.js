@@ -72,7 +72,7 @@ function start() {
 //replay
 function replay() {
   var state = sortable.option("disabled"); // get
-
+  $('#titre').html("Mémorisation");
 	sortable.option("disabled", true); // set
   fichiers=[];
   fichiers2=[];
@@ -118,6 +118,8 @@ function afficheIndexMix(){
       while (divs.length) {
           parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
       }
+    }else{
+      $('.divCorr').show();
     }
 
 
@@ -214,7 +216,7 @@ function etape1() {
 
     }
   });
-  bar.text.style.fontSize = '2rem';
+  bar.text.style.fontSize = '5vh';
 
   bar.animate(1.0);  // Number from 0.0 to 1.0
   addImages();
@@ -252,7 +254,7 @@ function etape2() {
 
     }
   });
-  bar.text.style.fontSize = '2rem';
+  bar.text.style.fontSize = '10vh';
 
   bar.animate(1.0);  // Number from 0.0 to 1.0
   etape = 3;
@@ -261,7 +263,7 @@ function etape2() {
 
 function etape3() {
   $('#sortable').show();
-  $('.divCorr').show();
+
   $('.overTime').hide();
   $('#clock').html("");
   $('#titre').html("Restitution");
@@ -294,7 +296,7 @@ function etape3() {
 
     }
   });
-  bar.text.style.fontSize = '2rem';
+  bar.text.style.fontSize = '5vh';
 
   bar.animate(1.0);  // Number from 0.0 to 1.0
   index = 0;
