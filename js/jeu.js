@@ -196,7 +196,7 @@ function etape1() {
     // prevent clipping
     strokeWidth: 8,
     trailWidth: 0,
-    duration: 600,
+    duration: 60000,
     text: {
       autoStyleContainer: false
     },
