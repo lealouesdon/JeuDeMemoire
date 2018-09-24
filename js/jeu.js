@@ -196,7 +196,7 @@ function etape1() {
     // prevent clipping
     strokeWidth: 8,
     trailWidth: 0,
-    duration: 60000,
+    duration: 600,
     text: {
       autoStyleContainer: false
     },
@@ -287,7 +287,7 @@ function etape3() {
       circle.path.setAttribute('stroke', state.color);
       circle.path.setAttribute('stroke-width', state.width);
 
-      var value = Math.round(circle.value() * 180 % 100);
+      var value = Math.round(circle.value()*180);
       if (value === 180) {
         etape4();
       } else {
